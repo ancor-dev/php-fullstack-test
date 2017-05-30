@@ -3,11 +3,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @JMS\ExclusionPolicy("none")
+ * @Serializer\ExclusionPolicy("none")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\Table(name="symfony_demo_user")
  *
@@ -48,7 +48,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @JMS\Exclude
+     * @Serializer\Exclude
      * @ORM\Column(type="string")
      */
     private $password;
