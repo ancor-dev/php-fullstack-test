@@ -15,8 +15,9 @@ class PostController extends Controller
      */
     public function listAction()
     {
-        $repository = $this->getDoctrine()->getRepository('AppBundle:Post');
-        return $repository->findAll();
+        return $this->getDoctrine()
+            ->getRepository(Post::class)
+            ->findAll();
     }
 
     /**
