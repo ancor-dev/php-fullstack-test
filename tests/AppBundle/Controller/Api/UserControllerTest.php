@@ -16,6 +16,8 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
         $doctrine = $client->getContainer()->get("doctrine");
         $manager = $doctrine->getManagerForClass(User::class);
+        $john = $manager->find(User::class, 1);
+        $john->setRoles(['ROLE_USER']);
         $user = $manager->find(User::class, 2);
         $user->setRoles(['ROLE_ADMIN']);
         $manager->flush();
