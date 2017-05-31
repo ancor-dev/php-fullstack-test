@@ -1,60 +1,51 @@
 <?php
 
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Post;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
 /**
- * This custom Doctrine repository contains some methods which are useful when
- * querying for blog post information.
- *
- * See http://symfony.com/doc/current/book/doctrine.html#custom-repository-classes
- *
- * @author Ryan Weaver <weaverryan@gmail.com>
- * @author Javier Eguiluz <javier.eguiluz@gmail.com>
+ * Class PostRepository
+ * @package AppBundle\Repository
  */
 class PostRepository extends EntityRepository
 {
-    /**
-     * @return Query
-     */
-    public function queryLatest()
+    public function queryLatest(): QueryBuilder
     {
-        return $this->getEntityManager()
-            ->createQuery('
-                SELECT p
-                FROM AppBundle:Post p
-                WHERE p.publishedAt <= :now
-                ORDER BY p.publishedAt DESC
-            ')
-            ->setParameter('now', new \DateTime())
-        ;
+        return $this
+            ->createQueryBuilder('p')
+            ->where('p.publishedAt <= :now')
+            ->orderBy('p.publishedAt', 'DESC')
+            ->setParameter('now', new \DateTime());
     }
 
     /**
-     * @param int $page
-     *
-     * @return Pagerfanta
+     * @param int $limit
+     * @param int $offset
+     * @return Post[]
      */
-    public function findLatest($page = 1)
+    public function findPosts(int $limit = 30, int $offset = 0): array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.author', 'a')
+            ->addSelect('a')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findLatest(int $page = 1): Pagerfanta
     {
         $paginator = new Pagerfanta(new DoctrineORMAdapter($this->queryLatest(), false));
-        $paginator->setMaxPerPage(Post::NUM_ITEMS);
-        $paginator->setCurrentPage($page);
 
-        return $paginator;
+        return $paginator
+            ->setMaxPerPage(Post::NUM_ITEMS)
+            ->setCurrentPage($page);
     }
 }
