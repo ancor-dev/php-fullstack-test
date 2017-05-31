@@ -38,6 +38,7 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -46,6 +47,7 @@ class Post
      *
      * @ORM\Column(type="string")
      * @Assert\NotBlank
+     * @Serializer\Expose()
      */
     private $title;
 
@@ -70,6 +72,7 @@ class Post
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="post.blank_content")
      * @Assert\Length(min=10, minMessage="post.too_short_content")
+     * @Serializer\Expose()
      */
     private $content;
 
@@ -78,6 +81,7 @@ class Post
      *
      * @ORM\Column(type="datetime")
      * @Assert\DateTime
+     * @Serializer\Expose()
      */
     private $publishedAt;
 
@@ -88,6 +92,7 @@ class Post
      * @ORM\JoinColumn(nullable=false)
      *
      * @Serializer\MaxDepth(1)
+     * @Serializer\Expose()
      */
     private $author;
 
