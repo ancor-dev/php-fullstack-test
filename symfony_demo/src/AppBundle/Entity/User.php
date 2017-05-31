@@ -114,14 +114,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        $roles = $this->roles;
-
-        // guarantees that a user always has at least one role for security
-        if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
-        }
-
-        return array_unique($roles);
+        return empty($this->roles) ? ['ROLE_USER'] : array_unique($this->roles);
     }
 
     public function setRoles(array $roles)
