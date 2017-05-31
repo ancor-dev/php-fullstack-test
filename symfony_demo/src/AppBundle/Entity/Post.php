@@ -20,6 +20,7 @@ use JMS\Serializer\Annotation as Serializer;
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
+ * @Serializer\ExclusionPolicy("all")
  */
 class Post
 {
