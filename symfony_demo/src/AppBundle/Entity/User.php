@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
- * @JMS\ExclusionPolicy("all")
+ * @Serializer\ExclusionPolicy("all")
  */
 class User implements UserInterface
 {
@@ -28,7 +28,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @JMS\Expose()
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -36,7 +36,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string", unique=true)
-     * @JMS\Expose()
+     * @Serializer\Expose()
      */
     private $username;
 
@@ -44,7 +44,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string", unique=true)
-     * @JMS\Expose()
+     * @Serializer\Expose()
      */
     private $email;
 
@@ -108,9 +108,9 @@ class User implements UserInterface
 
     /**
      * Returns the roles or permissions granted to the user for security.
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("roles")
-     * @JMS\Expose()
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("roles")
+     * @Serializer\Expose()
      */
     public function getRoles()
     {
