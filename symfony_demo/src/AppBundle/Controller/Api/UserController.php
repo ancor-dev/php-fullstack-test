@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Api;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as FOS;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UserController extends Controller
 {
@@ -32,19 +33,22 @@ class UserController extends Controller
 
     /**
      * @FOS\Put("/users/{id}/roles")
-     *
      * @FOS\RequestParam(name="roles")
      *
-     * @return \AppBundle\Entity\User
+     * @param User $theUser
+     * @param array $roles
+     * @return User
      */
-    public function setRolesAction(User $theUser, array $roles)
+    public function setRolesAction(User $theUser, array $roles): User
     {
-        $theUser->setRoles($roles);
+        $current = $this->getUser();
+        if ($current instanceof User && $theUser->getId() === $current->getId()) {
+            $theUser->setRoles($roles);
+            $manager = $this->getDoctrine()->getManagerForClass(User::class);
+            $manager->flush();
 
-        $manager = $this->getDoctrine()->getManagerForClass(User::class);
-
-        $manager->flush();
-
-        return $theUser;
+            return $theUser;
+        }
+        throw new AccessDeniedHttpException('Access denied');
     }
 }
