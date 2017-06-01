@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Api;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as FOS;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UserController extends Controller
 {
@@ -39,6 +40,9 @@ class UserController extends Controller
      */
     public function setRolesAction(User $theUser, array $roles)
     {
+        if ($theUser->getId() != $this->getUser()->getId()) {
+            throw new AccessDeniedHttpException('Forbidden');
+        }
         $theUser->setRoles($roles);
 
         $manager = $this->getDoctrine()->getManagerForClass(User::class);
