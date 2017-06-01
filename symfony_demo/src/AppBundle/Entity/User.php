@@ -7,6 +7,8 @@ use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * @JMS\ExclusionPolicy("none")
+ *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\Table(name="symfony_demo_user")
  *
@@ -46,6 +48,8 @@ class User implements UserInterface
 
     /**
      * @var string
+     *
+     * @JMS\Exclude
      *
      * @ORM\Column(type="string")
      */
