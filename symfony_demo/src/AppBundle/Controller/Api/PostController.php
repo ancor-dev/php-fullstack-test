@@ -9,23 +9,19 @@ use FOS\RestBundle\Controller\Annotations as FOS;
 class PostController extends Controller
 {
     /**
-     * @FOS\Get("/posts")
+     * @FOS\Get("/api/posts")
      *
      * @return \AppBundle\Entity\Post[]
      */
     public function listAction()
     {
         return $this->getDoctrine()
-            ->getManagerForClass(Post::class)
-            ->createQueryBuilder()
-            ->select('post')
-            ->from(Post::class, 'post')
-            ->getQuery()
-            ->execute();
+            ->getRepository(Post::class)
+            ->findAll();
     }
 
     /**
-     * @FOS\Get("/posts/{id}")
+     * @FOS\Get("/api/posts/{id}")
      *
      * @return \AppBundle\Entity\Post
      */
