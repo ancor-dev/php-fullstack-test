@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class UserController extends Controller
 {
     /**
-     * @FOS\Get("/api/users/{id}")
+     * @FOS\Get("/users/{id}")
      *
      * @return \AppBundle\Entity\User
      */
@@ -20,7 +20,7 @@ class UserController extends Controller
     }
 
     /**
-     * @FOS\Get("/api/users")
+     * @FOS\Get("/users")
      *
      * @return \AppBundle\Entity\User[]
      */
@@ -32,7 +32,7 @@ class UserController extends Controller
     }
 
     /**
-     * @FOS\Put("/api/users/{id}/roles")
+     * @FOS\Put("/users/{id}/roles")
      *
      * @FOS\RequestParam(name="roles")
      *

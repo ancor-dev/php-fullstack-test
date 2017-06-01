@@ -10,7 +10,7 @@ use FOS\RestBundle\Controller\Annotations as FOS;
 class CommentController extends Controller
 {
     /**
-     * @FOS\Get("/api/comment/{post_id}")
+     * @FOS\Get("/comment/{post_id}")
      *
      * @return \AppBundle\Entity\Comment[]
      */

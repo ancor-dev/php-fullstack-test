@@ -9,7 +9,7 @@ use FOS\RestBundle\Controller\Annotations as FOS;
 class PostController extends Controller
 {
     /**
-     * @FOS\Get("/api/posts")
+     * @FOS\Get("/posts")
      *
      * @return \AppBundle\Entity\Post[]
      */
