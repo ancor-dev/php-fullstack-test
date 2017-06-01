@@ -24,7 +24,7 @@ class UserControllerTest extends WebTestCase
     public function testListAction()
     {
         return $this->requestHelper()
-            ->get('/users')
+            ->get('/api/users')
             ->jsonHelper()
                 ->propertyHelper('[0].id')->assertSame(1)->end()
                 ->executeAndJsonDecode();
@@ -36,7 +36,7 @@ class UserControllerTest extends WebTestCase
     public function testGetNoPassword($users)
     {
         $this->requestHelper()
-            ->get('/users/' . $users[0]['id'])
+            ->get('/api/users/' . $users[0]['id'])
             ->jsonHelper()
                 ->propertyHelper('password')->setDoesNotExists(true)->end()
                 /* Bellow assertion seems accidental in terms of PHP#2 task and thus commented.
@@ -51,7 +51,7 @@ class UserControllerTest extends WebTestCase
     public function testGetRoles($users)
     {
         $this->requestHelper()
-            ->get('/users/' . $users[0]['id'])
+            ->get('/api/users/' . $users[0]['id'])
             ->jsonHelper()
                 ->propertyHelper('roles')->assertSame(["ROLE_USER"])->end()
                 ->executeAndJsonDecode();
@@ -68,7 +68,7 @@ class UserControllerTest extends WebTestCase
         ]);
 
         $this->requestHelper($client)
-            ->put('/users/2/roles')
+            ->put('/api/users/2/roles')
             ->jsonHelper()
                 ->withBody(['roles' => ['ROLE_TEMP', 'ROLE_ADMIN']])
                 ->propertyHelper('roles')->assertSame(['ROLE_TEMP', 'ROLE_ADMIN'])->end()
@@ -86,7 +86,7 @@ class UserControllerTest extends WebTestCase
         ]);
 
         $this->requestHelper($client)
-            ->put('/users/1/roles', 403)
+            ->put('/api/users/1/roles', 403)
             ->jsonHelper()
                 ->withBody(['roles' => []])
                 ->executeAndJsonDecode();
