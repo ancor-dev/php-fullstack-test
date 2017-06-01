@@ -33,4 +33,19 @@ class PostControllerTest extends WebTestCase
                 ->propertyHelper('')->assertCount(30)->end()
                 ->executeAndJsonDecode();
     }
+
+    public function testListCommentsAction()
+    {
+        $this->requestHelper()
+            ->get('/api/posts/1/comments')
+            ->jsonHelper()
+            ->propertyHelper('[0].id')->assertInternalType('integer')->end()
+            ->propertyHelper('[0].content')->assertInternalType('string')->end()
+            ->propertyHelper('[0].published_at')->assertInternalType('string')->end()
+            ->propertyHelper('[0].author.id')->assertInternalType('integer')->end()
+            ->propertyHelper('[0].author.username')->assertInternalType('string')->end()
+            ->propertyHelper('[0].author.email')->assertRegExp('/.+@.+/')->end()
+            ->propertyHelper('[0].author.roles')->assertNotEmpty()->end()
+            ->executeAndJsonDecode();
+    }
 }

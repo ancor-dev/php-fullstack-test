@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Api;
 
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Post;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,6 +27,27 @@ class PostController extends Controller
             ->getQuery()
             ->execute();
     }
+
+    /**
+     * REST resource action which returns comment list for specific post
+     *
+     * @FOS\Get("/posts/{id}/comments")
+     *
+     * @param Post $post
+     *
+     * @return Comment[]
+     */
+    public function listComments(Post $post)
+    {
+        // PHP#8 In real life project actions should be as thin as possible
+        // thus this query should be moved to concrete entity repository
+        return $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findBy(
+                ['post' => $post]
+            );
+    }
+
 
     /**
      * @FOS\Get("/posts/{id}")
