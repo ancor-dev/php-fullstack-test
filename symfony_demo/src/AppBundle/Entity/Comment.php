@@ -13,7 +13,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity
  * @ORM\Table(name="symfony_demo_comment")
