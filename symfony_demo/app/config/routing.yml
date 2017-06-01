@@ -28,3 +28,4 @@ homepage:
 
 api:
     resource: '@AppBundle/Controller/Api/'
+    prefix: /api
