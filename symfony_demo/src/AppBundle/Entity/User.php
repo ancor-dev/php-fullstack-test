@@ -66,7 +66,7 @@ class User implements UserInterface
      *
      * @ORM\Column(type="json_array")
      *
-     * @Serializer\Expose()
+     * @Serializer\Exclude()
      */
     private $roles = [];
 
@@ -116,6 +116,9 @@ class User implements UserInterface
 
     /**
      * Returns the roles or permissions granted to the user for security.
+     *
+     * @Serializer\VirtualProperty()
+     * @Serializer\Expose()
      */
     public function getRoles()
     {
