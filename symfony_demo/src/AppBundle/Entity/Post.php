@@ -83,7 +83,7 @@ class Post
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      *
      * @JMS\MaxDepth(1)

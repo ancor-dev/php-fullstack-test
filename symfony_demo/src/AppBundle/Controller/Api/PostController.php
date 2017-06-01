@@ -16,12 +16,8 @@ class PostController extends Controller
     public function listAction()
     {
         return $this->getDoctrine()
-            ->getManagerForClass(Post::class)
-            ->createQueryBuilder()
-            ->select('post')
-            ->from(Post::class, 'post')
-            ->getQuery()
-            ->execute();
+            ->getRepository(Post::class)
+            ->findAll();
     }
 
     /**
