@@ -20,6 +20,8 @@ class PostController extends Controller
             ->createQueryBuilder()
             ->select('post')
             ->from(Post::class, 'post')
+            ->leftJoin('post.author', 'author')
+            ->addSelect('author')
             ->getQuery()
             ->execute();
     }
