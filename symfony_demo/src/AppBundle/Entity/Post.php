@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
@@ -86,7 +86,7 @@ class Post
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      *
-     * @JMS\MaxDepth(1)
+     * @Serializer\MaxDepth(1)
      */
     private $author;
 
@@ -100,7 +100,7 @@ class Post
      * )
      * @ORM\OrderBy({"publishedAt": "DESC"})
      *
-     * @JMS\Exclude()
+     * @Serializer\Exclude()
      */
     private $comments;
 
