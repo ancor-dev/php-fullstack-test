@@ -18,6 +18,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class User implements UserInterface
 {
@@ -27,6 +29,8 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -34,6 +38,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string", unique=true)
+     *
+     * @Serializer\Expose()
      */
     private $username;
 
@@ -41,6 +47,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string", unique=true)
+     *
+     * @Serializer\Expose()
      */
     private $email;
 
@@ -48,6 +56,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     *
      * @Serializer\Exclude()
      */
     private $password;
@@ -56,6 +65,8 @@ class User implements UserInterface
      * @var array
      *
      * @ORM\Column(type="json_array")
+     *
+     * @Serializer\Expose()
      */
     private $roles = [];
 
