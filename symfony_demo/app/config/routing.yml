@@ -27,4 +27,5 @@ homepage:
         _locale:     '%locale%'
 
 api:
+    prefix: /api
     resource: '@AppBundle/Controller/Api/'
