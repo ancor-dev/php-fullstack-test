@@ -45,7 +45,6 @@ class Comment
      *
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Serializer\Expose()
      */
     private $post;
 
