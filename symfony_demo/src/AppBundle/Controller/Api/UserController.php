@@ -6,6 +6,8 @@ use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as FOS;
 
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 class UserController extends Controller
 {
     /**
@@ -39,6 +41,12 @@ class UserController extends Controller
      */
     public function setRolesAction(User $theUser, array $roles)
     {
+        $authUser = $this->get('security.token_storage')->getToken()->getUser();
+        if (!$authUser || $authUser->getId() != $theUser->getId()) {
+
+            throw new AccessDeniedHttpException();
+        }
+
         $theUser->setRoles($roles);
 
         $manager = $this->getDoctrine()->getManagerForClass(User::class);
