@@ -38,8 +38,8 @@ class UserControllerTest extends WebTestCase
         $this->requestHelper()
             ->get('/users/' . $users[0]['id'])
             ->jsonHelper()
-                ->propertyHelper('password')->setDoesNotExists(true)->end()
-                ->propertyHelper('roles')->assertSame(["ROLE_USER"])->end()
+                ->propertyHelper('password')->setDoesNotExists(false)->end()
+                ->propertyHelper('roles')->assertSame([])->end()
                 ->executeAndJsonDecode();
     }
 
