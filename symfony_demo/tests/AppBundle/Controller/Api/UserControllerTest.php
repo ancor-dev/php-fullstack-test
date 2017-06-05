@@ -51,7 +51,7 @@ class UserControllerTest extends WebTestCase
         $this->requestHelper()
             ->get('/api/users/' . $users[0]['id'])
             ->jsonHelper()
-                ->propertyHelper('roles')->assertSame(["ROLE_USER"])->end()
+                ->propertyHelper('roles')->assertSame([])->end()
                 ->executeAndJsonDecode();
     }
 
