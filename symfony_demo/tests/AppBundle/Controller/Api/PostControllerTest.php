@@ -28,7 +28,7 @@ class PostControllerTest extends WebTestCase
     {
         $this->requestHelper()
             ->get('/posts')
-            ->sqlHelper(1)->end()
+            ->sqlHelper(2)->end()
             ->jsonHelper()
                 ->propertyHelper('')->assertCount(30)->end()
                 ->executeAndJsonDecode();
