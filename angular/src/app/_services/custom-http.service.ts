@@ -5,6 +5,7 @@ import { API_CONST } from './constants';
 
 @Injectable()
 export class CustomHttp extends Http {
+    // NG#4 already Done
     constructor(backend: XHRBackend, options: RequestOptions) {
         super(backend, options);
     }
