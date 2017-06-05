@@ -9,12 +9,14 @@ import { PostComponent } from './post/post.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { CustomHttp } from './_services/custom-http.service';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PostComponent
+    PostComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,16 @@
+<div class="row post-comment">
+    <a name="comment_15"></a>
+    <h4 class="col-sm-3">
+        <strong *ngIf="comment.author">{{comment.author.email }}</strong> commented on
+        <strong>{{ comment.published_at|date:'medium' }}</strong>
+    </h4>
+    <div class="col-sm-9">
+        <p>{{ comment.content}}</p>
+    </div>
+</div>
+
+
+
+
+
+

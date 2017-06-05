@@ -9,4 +9,10 @@
 
     {{ post.content }}
 
+    <div *ngIf="comments && comments.length">
+        <h3 >Comments count: {{ comments.length }}</h3>
+        <div *ngFor="let comment of comments">
+            <app-content [comment]="comment"></app-content>
+        </div>
+    </div>
 </div>
