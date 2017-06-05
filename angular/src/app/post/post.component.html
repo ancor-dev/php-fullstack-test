@@ -1,0 +1,12 @@
+<div class="container" *ngIf="!loading">
+
+<h1>{{ post.title }}</h1>
+
+    <p class="post-metadata">
+        <span class="metadata"><i class="fa fa-calendar"></i> {{post.published_at|date:"medium"}}</span>
+        <span class="metadata"><i class="fa fa-user"></i> {{ post.author.email }}</span>
+    </p>
+
+    {{ post.content }}
+
+</div>
