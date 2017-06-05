@@ -1,7 +1,17 @@
 <div class="container">
-  <div *ngFor="let post of posts" class="row mt-4">
-    <div class="col">
-      <h2>{{post.title}}</h2>
-    </div>
-  </div>
+  <article class="post" *ngFor="let post of posts">
+    <h2>
+      <a [routerLink]="['/post', post.id]"
+         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        {{post.title}}
+      </a>
+    </h2>
+
+    <p class="post-metadata">
+      <span class="metadata"><i class="fa fa-calendar"></i> {{post.published_at|date:"MMMM dd, y, hh:m:s a"}}</span>
+      <span class="metadata"><i class="fa fa-user"></i> {{ post.author.email }}</span>
+    </p>
+
+    <p>{{post.summary}}</p>
+  </article>
 </div>

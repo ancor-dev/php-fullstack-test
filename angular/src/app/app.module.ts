@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
+import { CustomHttp } from './_services/custom-http.service';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,7 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     AppRoutingModule
   ],
-  providers: [
-    { provide: 'API_URL', useValue: 'http://localhost:8000/' }
-  ],
+  providers: [CustomHttp],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

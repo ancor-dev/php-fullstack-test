@@ -10,6 +10,7 @@ class PostController extends Controller
 {
     /**
      * @FOS\Get("/posts")
+     * @FOS\View()
      *
      * @return \AppBundle\Entity\Post[]
      */

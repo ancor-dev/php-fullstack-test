@@ -47,6 +47,7 @@ class Post
      *
      * @ORM\Column(type="string")
      * @Assert\NotBlank
+     * @Serializer\Expose()
      */
     private $title;
 
@@ -62,6 +63,7 @@ class Post
      *
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="post.blank_summary")
+     * @Serializer\Expose()
      */
     private $summary;
 

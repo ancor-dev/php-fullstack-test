@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
 import { PostInterface } from '../models/posts';
+import { CustomHttp } from '../_services/custom-http.service';
 
 @Component({
   selector: 'app-home',
@@ -10,19 +11,17 @@ import { PostInterface } from '../models/posts';
 export class HomeComponent implements OnInit {
   public posts: PostInterface[];
 
-  constructor(private http: Http, @Inject('API_URL') private apiUrl: string) { }
+  constructor(private http: CustomHttp) { }
 
   ngOnInit() {
     this.loadPosts();
   }
 
   public loadPosts() {
-    const headers: Headers = new Headers({ 'Content-Type': 'application/json' });
-
-    this.http.get(this.apiUrl + 'posts', { headers: headers })
-        .subscribe((data: Response) => {
-          this.posts = data.json();
-        });
+      this.http.get('posts')
+          .subscribe((data: Response) => {
+              this.posts = data.json();
+          });
   }
 
 }
