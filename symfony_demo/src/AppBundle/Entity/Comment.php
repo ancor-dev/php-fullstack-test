@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="symfony_demo_comment")
  * @Serializer\ExclusionPolicy("all")
  *
@@ -37,6 +37,8 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Serializer\Expose()
+     *
      */
     private $id;
 
@@ -59,6 +61,7 @@ class Comment
      *     max=10000,
      *     maxMessage="comment.too_long"
      * )
+     * @Serializer\Expose()
      */
     private $content;
 
@@ -67,6 +70,7 @@ class Comment
      *
      * @ORM\Column(type="datetime")
      * @Assert\DateTime
+     * @Serializer\Expose()
      */
     private $publishedAt;
 
@@ -75,6 +79,7 @@ class Comment
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * @Serializer\Expose()
      */
     private $author;
 
