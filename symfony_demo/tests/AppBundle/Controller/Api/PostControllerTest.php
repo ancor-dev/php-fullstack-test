@@ -12,7 +12,7 @@ class PostControllerTest extends WebTestCase
     public function testListAction()
     {
         $this->requestHelper()
-            ->get('/posts')
+            ->get('/api/posts')
             ->jsonHelper()
                 ->propertyHelper('')->assertCount(30)->end()
                 ->propertyHelper('[0].id')->assertInternalType('integer')->end()
@@ -27,7 +27,7 @@ class PostControllerTest extends WebTestCase
     public function testListActionOptimization()
     {
         $this->requestHelper()
-            ->get('/posts')
+            ->get('/api/posts')
             ->sqlHelper(2)->end()
             ->jsonHelper()
                 ->propertyHelper('')->assertCount(30)->end()
