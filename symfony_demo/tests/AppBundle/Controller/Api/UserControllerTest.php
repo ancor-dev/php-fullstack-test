@@ -48,6 +48,7 @@ class UserControllerTest extends WebTestCase
      */
     public function testGetRoles($users)
     {
+        // Fixed at PHP#2
         $this->requestHelper()
             ->get('/api/users/' . $users[0]['id'])
             ->jsonHelper()
