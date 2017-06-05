@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Api;
 
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\Annotations as FOS;
 
 class UserController extends Controller
@@ -34,6 +35,7 @@ class UserController extends Controller
      * @FOS\Put("/users/{id}/roles")
      *
      * @FOS\RequestParam(name="roles")
+     * @Security("is_granted('edit', theUser)")
      *
      * @return \AppBundle\Entity\User
      */
