@@ -28,7 +28,6 @@ export class PostComponent implements OnInit {
       this.http.get(this.apiUrl + 'posts/' + postId, { headers: headers })
           .subscribe((data: Response) => {
             this.post = data.json();
-            console.log(this.post);
           });
     }
   }
