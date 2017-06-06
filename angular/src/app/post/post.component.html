@@ -1,11 +1,7 @@
 <div class="container">
-  <div *ngFor="let post of posts" class="post">
+  <div *ngIf="post" class="post">
     <div>
-      <h2>
-        <a routerLink="/posts/{{post.id}}" routerLinkActive="active">
-          {{post.title}}
-        </a>
-      </h2>
+      <h2>{{post.title}}</h2>
     </div>
 
     <div class="post-metadata">
