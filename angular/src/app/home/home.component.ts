@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   public loadPosts() {
-    const headers: Headers = new Headers({ 'Content-Type': 'application/json' });
+    const headers: Headers = new Headers({});
 
     this.http.get(this.apiUrl + 'posts', { headers: headers })
         .subscribe((data: Response) => {
