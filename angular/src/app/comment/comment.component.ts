@@ -1,15 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { ActivatedRoute, Params } from '@angular/router';
-import { PostInterface } from '../models/posts';
+import { CommentInterface } from '../models/comments';
 
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css']
+  selector: 'app-comment',
+  templateUrl: './comment.component.html',
+  styleUrls: ['./comment.component.css']
 })
-export class PostComponent implements OnInit {
-  public post: PostInterface;
+export class CommentComponent implements OnInit {
+  public comments: CommentInterface[];
 
   constructor(private http: Http, @Inject('API_URL') private apiUrl: string, private route: ActivatedRoute) { }
 
@@ -17,17 +17,17 @@ export class PostComponent implements OnInit {
 
     this.route.params.subscribe(params => {
 
-      this.loadPost(params['id']);
+      this.loadComments(params['id']);
     });
   }
 
-  public loadPost(postId) {
+  public loadComments(postId) {
     const headers: Headers = new Headers({});
 
     if (postId) {
-      this.http.get(this.apiUrl + 'api/posts/' + postId, { headers: headers })
+      this.http.get(this.apiUrl + 'api/comments/' + postId, { headers: headers })
           .subscribe((data: Response) => {
-            this.post = data.json();
+            this.comments = data.json();
           });
     }
   }

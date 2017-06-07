@@ -1,0 +1,21 @@
+<div class="comments">
+
+  <div *ngIf="comments">
+    <div>
+      <h2>{{comments.length}} comments</h2>
+    </div>
+  </div>
+
+  <div *ngFor="let comment of comments" class="comment">
+
+    <div class="comment-metadata">
+      <span class="metadata author">{{comment.author.email}}</span>
+      <span class="metadata">commented on</span>
+      <span class="metadata published">{{comment.published_at}}</span>
+    </div>
+
+    <div class="comment-content">
+      {{comment.content}}
+    </div>
+  </div>
+</div>

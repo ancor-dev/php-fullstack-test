@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
+import { CommentComponent } from './comment/comment.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
   declarations: [
     AppComponent,
     HomeComponent,
-    PostComponent
+    PostComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   public loadPosts() {
     const headers: Headers = new Headers({});
 
-    this.http.get(this.apiUrl + 'posts', { headers: headers })
+    this.http.get(this.apiUrl + 'api/posts', { headers: headers })
         .subscribe((data: Response) => {
           this.posts = data.json();
         });

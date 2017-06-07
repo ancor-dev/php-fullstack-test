@@ -1,0 +1,27 @@
+div.comments, div.comment {
+    margin-top: 20px;
+}
+
+div.comment-content {
+    text-align: justify;
+    display: table-cell;
+    width: 80%;
+}
+
+div.comment-metadata {
+    width: 20%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #b4bcc2;
+    font-size: 14px;
+    display: table-cell;
+}
+
+span.metadata {
+    margin-right: 50px;
+    display: table-row;
+}
+
+span.author, span.published {
+    color: #292b2c;
+}
