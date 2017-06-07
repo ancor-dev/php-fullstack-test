@@ -1,17 +1,20 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Response, Headers } from '@angular/http';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PostInterface } from '../models/posts';
+
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css']
+  styleUrls: ['./post.component.css'],
+  providers: [ApiService]
 })
 export class PostComponent implements OnInit {
   public post: PostInterface;
 
-  constructor(private http: Http, @Inject('API_URL') private apiUrl: string, private route: ActivatedRoute) { }
+  constructor(private api: ApiService, @Inject('API_URL') private apiUrl: string, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -25,7 +28,7 @@ export class PostComponent implements OnInit {
     const headers: Headers = new Headers({});
 
     if (postId) {
-      this.http.get(this.apiUrl + 'api/posts/' + postId, { headers: headers })
+      this.api.getHttp().get(this.apiUrl + 'api/posts/' + postId, { headers: headers })
           .subscribe((data: Response) => {
             this.post = data.json();
           });
