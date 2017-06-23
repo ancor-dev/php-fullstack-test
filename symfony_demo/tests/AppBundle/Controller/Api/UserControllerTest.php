@@ -48,6 +48,8 @@ class UserControllerTest extends WebTestCase
      */
     public function testGetRoles($users)
     {
+        // Task: PHP#6 Fix failure Tests\AppBundle\Controller\Api\UserControllerTest::testGetRoles
+        // Done: in PHP#2
         $this->requestHelper()
             ->get('/api/v1/users/' . $users[0]['id'])
             ->jsonHelper()
