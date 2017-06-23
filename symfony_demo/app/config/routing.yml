@@ -28,3 +28,5 @@ homepage:
 
 api:
     resource: '@AppBundle/Controller/Api/'
+    # I think every api SHOULD be versioned
+    prefix: '/api/v1'

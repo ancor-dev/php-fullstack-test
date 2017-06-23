@@ -12,7 +12,7 @@ class PostControllerTest extends WebTestCase
     public function testListAction()
     {
         $this->requestHelper()
-            ->get('/posts')
+            ->get('/api/v1/posts')
             ->jsonHelper()
                 ->propertyHelper('total_items')->assertSame(30)->end()
                 ->propertyHelper('total_pages')->assertSame(3)->end()
@@ -30,7 +30,7 @@ class PostControllerTest extends WebTestCase
     public function testListActionOptimization()
     {
         $this->requestHelper()
-            ->get('/posts')
+            ->get('/api/v1/posts')
             // This request can be optimized to 2 or 1 sql request, if we will not use PagerFanta
             ->sqlHelper(3)->end()
             ->jsonHelper()
