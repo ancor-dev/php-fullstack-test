@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Api;
 
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\Annotations as FOS;
 
 class UserController extends Controller
@@ -31,13 +32,17 @@ class UserController extends Controller
     }
 
     /**
-     * @FOS\Put("/users/{id}/roles")
+     * @FOS\Put("/users/{id}/roles", requirements={"id" = "\d+"})
      *
      * @FOS\RequestParam(name="roles")
+     * @Security("is_granted('edit-roles', theUser)")
+     *
+     * @param User  $theUser
+     * @param array $roles
      *
      * @return \AppBundle\Entity\User
      */
-    public function setRolesAction(User $theUser, array $roles)
+    public function setRolesAction(User $theUser, array $roles): User
     {
         $theUser->setRoles($roles);
 
