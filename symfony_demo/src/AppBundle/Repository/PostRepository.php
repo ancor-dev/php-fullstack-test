@@ -17,9 +17,6 @@ use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
-/**
- * @package AppBundle\Repository
- */
 class PostRepository extends EntityRepository
 {
     /**
