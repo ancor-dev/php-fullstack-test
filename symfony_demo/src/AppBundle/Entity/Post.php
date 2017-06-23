@@ -11,6 +11,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
  * @ORM\Table(name="symfony_demo_post")
  *
+ * @Serializer\ExclusionPolicy("all")
+ *
  * Defines the properties of the Post entity to represent the blog posts.
  *
  * See http://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
@@ -38,6 +40,7 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -45,6 +48,7 @@ class Post
      * @var string
      *
      * @ORM\Column(type="string")
+     * @Serializer\Expose()
      * @Assert\NotBlank
      */
     private $title;
@@ -53,6 +57,7 @@ class Post
      * @var string
      *
      * @ORM\Column(type="string")
+     * @Serializer\Expose()
      */
     private $slug;
 
@@ -60,6 +65,7 @@ class Post
      * @var string
      *
      * @ORM\Column(type="string")
+     * @Serializer\Expose()
      * @Assert\NotBlank(message="post.blank_summary")
      */
     private $summary;
@@ -68,6 +74,7 @@ class Post
      * @var string
      *
      * @ORM\Column(type="text")
+     * @Serializer\Expose()
      * @Assert\NotBlank(message="post.blank_content")
      * @Assert\Length(min=10, minMessage="post.too_short_content")
      */
@@ -77,6 +84,7 @@ class Post
      * @var \DateTime
      *
      * @ORM\Column(type="datetime")
+     * @Serializer\Expose()
      * @Assert\DateTime
      */
     private $publishedAt;
@@ -87,6 +95,7 @@ class Post
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      *
+     * @Serializer\Expose()
      * @Serializer\MaxDepth(1)
      */
     private $author;
@@ -100,15 +109,13 @@ class Post
      *      orphanRemoval=true
      * )
      * @ORM\OrderBy({"publishedAt": "DESC"})
-     *
-     * @Serializer\Exclude()
      */
     private $comments;
 
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
-        $this->comments = new ArrayCollection();
+        $this->comments    = new ArrayCollection();
     }
 
     public function getId()
