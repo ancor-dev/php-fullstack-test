@@ -13,48 +13,45 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Post;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
 /**
- * This custom Doctrine repository contains some methods which are useful when
- * querying for blog post information.
- *
- * See http://symfony.com/doc/current/book/doctrine.html#custom-repository-classes
- *
- * @author Ryan Weaver <weaverryan@gmail.com>
- * @author Javier Eguiluz <javier.eguiluz@gmail.com>
+ * @package AppBundle\Repository
  */
 class PostRepository extends EntityRepository
 {
     /**
-     * @return Query
+     * @return QueryBuilder
      */
-    public function queryLatest()
+    public function queryLatest(): QueryBuilder
     {
-        return $this->getEntityManager()
-            ->createQuery('
-                SELECT p
-                FROM AppBundle:Post p
-                WHERE p.publishedAt <= :now
-                ORDER BY p.publishedAt DESC
-            ')
+        return $this
+            ->createQueryBuilder('p')
+            ->where('p.publishedAt <= :now')
+            ->orderBy('p.publishedAt', 'DESC')
             ->setParameter('now', new \DateTime())
         ;
     }
 
     /**
      * @param int $page
+     * @param int $perPage
      *
      * @return Pagerfanta
      */
-    public function findLatest($page = 1)
+    public function findLatest(int $page = 1, int $perPage = Post::NUM_ITEMS): Pagerfanta
     {
-        $paginator = new Pagerfanta(new DoctrineORMAdapter($this->queryLatest(), false));
-        $paginator->setMaxPerPage(Post::NUM_ITEMS);
-        $paginator->setCurrentPage($page);
+        $perPage = $perPage < 0 ? 0 : (
+                   $perPage > Post::MAX_NUM_TIMES ? Post::MAX_NUM_TIMES :
+                              $perPage);
 
-        return $paginator;
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($this->queryLatest(), false));
+
+        return $paginator
+            ->setMaxPerPage($perPage)
+            ->setCurrentPage($page)
+        ;
     }
 }

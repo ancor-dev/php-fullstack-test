@@ -3,34 +3,49 @@
 namespace AppBundle\Controller\Api;
 
 use AppBundle\Entity\Post;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Pagination\PaginatedCollection;
+use AppBundle\Repository\PostRepository;
 use FOS\RestBundle\Controller\Annotations as FOS;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PostController extends Controller
 {
     /**
-     * @FOS\Get("/posts")
+     * @FOS\Get("/posts", requirements={"id" = "\d+"})
+     * @FOS\QueryParam(name="page", requirements="\d+", default="1")
+     * @FOS\QueryParam(name="perPage", requirements="\d+", default="10")
      *
-     * @return \AppBundle\Entity\Post[]
+     * @param ParamFetcherInterface $fetcher
+     * @return PaginatedCollection
      */
-    public function listAction()
+    public function listAction(ParamFetcherInterface $fetcher): PaginatedCollection
     {
-        return $this->getDoctrine()
-            ->getManagerForClass(Post::class)
-            ->createQueryBuilder()
-            ->select('post')
-            ->from(Post::class, 'post')
-            ->getQuery()
-            ->execute();
+        $pager = $this
+            ->getPostRepository()
+            ->findLatest($fetcher->get('page'),
+                         $fetcher->get('perPage'));
+
+        $collection = new PaginatedCollection($pager);
+
+        return $collection;
     }
 
     /**
-     * @FOS\Get("/posts/{id}")
+     * @FOS\Get("/posts/{id}", requirements={"id" = "\d+"})
      *
-     * @return \AppBundle\Entity\Post
+     * @param Post $post
+     * @return Post
      */
-    public function getAction(Post $post)
+    public function getAction(Post $post): Post
     {
         return $post;
     }
+
+    private function getPostRepository(): PostRepository
+    {
+        return $this->getDoctrine()
+                    ->getRepository(Post::class);
+    }
+
 }

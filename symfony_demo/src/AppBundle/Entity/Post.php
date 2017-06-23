@@ -30,6 +30,7 @@ class Post
      * See http://symfony.com/doc/current/best_practices/configuration.html#constants-vs-configuration-options
      */
     const NUM_ITEMS = 10;
+    const MAX_NUM_TIMES = 50;
 
     /**
      * @var int

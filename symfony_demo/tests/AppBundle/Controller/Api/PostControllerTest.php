@@ -14,13 +14,16 @@ class PostControllerTest extends WebTestCase
         $this->requestHelper()
             ->get('/posts')
             ->jsonHelper()
-                ->propertyHelper('')->assertCount(30)->end()
-                ->propertyHelper('[0].id')->assertInternalType('integer')->end()
-                ->propertyHelper('[0].content')->assertInternalType('string')->end()
-                ->propertyHelper('[0].published_at')->assertSame('2017-01-11T22:20:12+0000')->end()
-                ->propertyHelper('[0].author.id')->assertInternalType('integer')->end()
-                ->propertyHelper('[0].author.username')->assertSame('anna_admin')->end()
-                ->propertyHelper('[0].author.email')->assertSame('anna_admin@symfony.com')->end()
+                ->propertyHelper('total_items')->assertSame(30)->end()
+                ->propertyHelper('total_pages')->assertSame(3)->end()
+                ->propertyHelper('items')->assertCount(10)->end()
+
+                ->propertyHelper('items[0].id')->assertInternalType('integer')->end()
+                ->propertyHelper('items[0].content')->assertInternalType('string')->end()
+                ->propertyHelper('items[0].published_at')->assertSame('2017-01-11T22:20:12+0000')->end()
+                ->propertyHelper('items[0].author.id')->assertInternalType('integer')->end()
+                ->propertyHelper('items[0].author.username')->assertSame('anna_admin')->end()
+                ->propertyHelper('items[0].author.email')->assertSame('anna_admin@symfony.com')->end()
                 ->executeAndJsonDecode();
     }
 
@@ -28,9 +31,10 @@ class PostControllerTest extends WebTestCase
     {
         $this->requestHelper()
             ->get('/posts')
-            ->sqlHelper(1)->end()
+            // This request can be optimized to 2 or 1 sql request, if we will not use PagerFanta
+            ->sqlHelper(3)->end()
             ->jsonHelper()
-                ->propertyHelper('')->assertCount(30)->end()
+                ->propertyHelper('items')->assertCount(10)->end()
                 ->executeAndJsonDecode();
     }
 }
