@@ -3,7 +3,8 @@ namespace AppBundle\Pagination;
 use Pagerfanta\Pagerfanta;
 
 /**
- * This is just example. Will be better to use
+ * This is just example.
+ * Every collection should has pagination.
  */
 class PaginatedCollection {
     public $totalItems;

@@ -85,6 +85,7 @@ class Post
      *
      * @ORM\Column(type="datetime")
      * @Serializer\Expose()
+     * @Serializer\Type("DateTime<'Y-m-d\TH:i:sO'>")
      * @Assert\DateTime
      */
     private $publishedAt;

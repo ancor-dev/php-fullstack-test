@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
  * @ORM\Table(name="symfony_demo_comment")
  *
  * @Serializer\ExclusionPolicy("all")
@@ -32,6 +32,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Comment
 {
+    const NUM_ITEMS = 10;
+    const MAX_NUM_TIMES = 50;
+
     /**
      * @var int
      *
@@ -47,7 +50,6 @@ class Comment
      *
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Serializer\Expose()
      */
     private $post;
 
@@ -71,6 +73,7 @@ class Comment
      *
      * @ORM\Column(type="datetime")
      * @Serializer\Expose()
+     * @Serializer\Type("DateTime<'Y-m-d\TH:i:sO'>")
      * @Assert\DateTime
      */
     private $publishedAt;
