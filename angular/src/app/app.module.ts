@@ -9,6 +9,8 @@ import { ROUTES } from './app.routes';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import './rxjs-operators';
+
 @NgModule({
   declarations: [
     AppComponent,

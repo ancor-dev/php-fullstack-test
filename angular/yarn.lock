@@ -151,6 +151,10 @@
     magic-string "^0.19.0"
     source-map "^0.5.6"
 
+"@types/http-status@^0.2.29":
+  version "0.2.29"
+  resolved "https://registry.yarnpkg.com/@types/http-status/-/http-status-0.2.29.tgz#3d7d256a1ca503858c1c6280e6af76df2fcbaa56"
+
 "@types/jasmine@2.5.45":
   version "2.5.45"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.45.tgz#58928a621d014ce6ab59c5a9c41071f7328b0ca9"
@@ -2110,6 +2114,10 @@ http-signature@~1.1.0:
     assert-plus "^0.2.0"
     jsprim "^1.2.2"
     sshpk "^1.7.0"
+
+http-status@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/http-status/-/http-status-1.0.1.tgz#dc43001a8bfc50ac87d485a892f7578964bc94a2"
 
 https-browserify@0.0.1:
   version "0.0.1"
