@@ -1,32 +1,27 @@
 import { BaseModel } from 'app/models/base-model';
+import { CommentModel } from './comment.model';
 import { UserModel } from 'app/models/user.model';
 
-import { PostModel } from './post.model';
-
-describe('PostModel', () => {
+describe('CommentModel', () => {
 
   it('should be instance of BaseModel', () => {
-    const ins = new PostModel();
+    const ins = new CommentModel();
     expect(ins instanceof BaseModel).toBeTruthy();
   });
 
   it('fromApi() should transform set all fields via constructor', () => {
     const data = {
-      id:           123,
-      title:        'Some title',
-      slug:         'some-slag',
-      summary:      'post summary',
+      id:           111,
+      content:      'some-content',
       published_at: '2017-01-11T22:20:12+0200',
-      author:       'author-object',
+      author:       'author-object' as any,
     };
     spyOn(UserModel, 'fromApi').and.returnValue('parsed-author-object');
-    const ins = PostModel.fromApi(data);
+    const ins = CommentModel.fromApi(data);
 
-    expect(ins instanceof PostModel).toBeTruthy();
+    expect(ins instanceof CommentModel).toBeTruthy();
     expect(ins.id).toBe(data.id);
-    expect(ins.title).toBe(data.title);
-    expect(ins.slug).toEqual(data.slug);
-    expect(ins.summary).toBe(data.summary);
+    expect(ins.content).toBe(data.content);
     expect(+ins.publishedAt).toBe(+new Date(data.published_at));
     expect(ins.author).toBe('parsed-author-object');
 

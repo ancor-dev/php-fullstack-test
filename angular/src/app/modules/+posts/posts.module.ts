@@ -8,6 +8,7 @@ import { SharedModule } from 'app/shared';
 import { ROUTES } from './posts.routes';
 import { SERVICES } from './services';
 import { PAGES_DECLARATIONS, PAGES_PROVIDERS } from './pages';
+import { COMPONENTS } from './components';
 
 console.log('%c`Posts` page bundle loaded asynchronously', 'color: gray');
 
@@ -21,6 +22,7 @@ console.log('%c`Posts` page bundle loaded asynchronously', 'color: gray');
   ],
   declarations: [
     ...PAGES_DECLARATIONS,
+    ...COMPONENTS,
   ],
   providers: [
     ...PAGES_PROVIDERS,

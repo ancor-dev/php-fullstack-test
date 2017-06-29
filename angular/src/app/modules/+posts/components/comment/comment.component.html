@@ -1,0 +1,10 @@
+<div class="row">
+  <a name="comment_{{ comment.id }}"></a>
+
+  <h4 class="col-sm-3">
+    <strong>{{ comment.author.email }}</strong>
+    <strong>{{ comment.publishedAt | date: 'longDate' }}</strong>
+  </h4>
+
+  <div class="col-sm-9" markdown-to-html [data]="comment.content"></div>
+</div>

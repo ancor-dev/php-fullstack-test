@@ -1,0 +1,10 @@
+<div *ngIf="collection && collection.items.length; else noComments">
+
+    <h3 class="comment-count">{{ collection.items.length }} Comments</h3>
+    <app-comment *ngFor="let comment of collection.items" [comment]="comment"></app-comment>
+
+</div>
+
+<ng-template #noComments>
+    <p>No comments yet.</p>
+</ng-template>
