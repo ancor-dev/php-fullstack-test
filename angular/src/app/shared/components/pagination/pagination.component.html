@@ -1,0 +1,41 @@
+<nav>
+    <ul class="pagination" *ngIf="collection">
+        <!-- prev button -->
+        <li class="page-item" [class.disabled]="!collection.hasPrevPage">
+            <a class="page-link"
+               role="button"
+               aria-label="Previous"
+               (click)="onChangePage(collection.prevPage)"
+            >
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+
+        <!-- page buttons -->
+        <li class="page-item" *ngFor="let page of pages" [class.active]="isCurrent(page)">
+            <a class="page-link"
+               role="button"
+               (click)="onChangePage(page)"
+               *ngIf="!isCurrent(page)"
+            >{{ page }}</a>
+
+            <span class="page-link" *ngIf="isCurrent(page)">
+                      {{ page }}
+                      <span class="sr-only">(current)</span>
+                  </span>
+        </li>
+
+        <!-- next button -->
+        <li class="page-item" [class.disabled]="!collection.hasNextPage">
+            <a class="page-link"
+               role="button"
+               aria-label="Next"
+               (click)="onChangePage(collection.nextPage)"
+            >
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>

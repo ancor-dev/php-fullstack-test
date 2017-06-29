@@ -21,7 +21,7 @@ export abstract class BaseModel<M> {
     const sourceField = rawField !== undefined ? rawField : field;
 
     model[ field ] = raw[ sourceField ] === undefined
-      ? null
+      ? undefined
       : ( // make copy of the object if it an array or a BaseModel instance
           raw[ sourceField ] instanceof Array     ? (raw[ sourceField ] as Array<any>).concat()    :
           raw[ sourceField ] instanceof BaseModel ? (raw[ sourceField ] as BaseModel<any>).clone() :
