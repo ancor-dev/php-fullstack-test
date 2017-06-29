@@ -32,7 +32,7 @@ class PostController extends Controller
     }
 
     /**
-     * @FOS\Get("/posts/{id}", requirements={"id" = "\d+"})
+     * @FOS\Get("/posts/{slug}", requirements={"slug" = "[\w\d_-]+"})
      *
      * @param Post $post
      * @return Post
