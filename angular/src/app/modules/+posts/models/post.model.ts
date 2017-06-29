@@ -9,6 +9,7 @@ export class PostModel extends BaseModel<PostModel> {
   public title: string;
   public slug: string;
   public summary: string;
+  public content: string;
   public readonly publishedAt: Date;
   public readonly author: UserModel;
 
@@ -20,6 +21,7 @@ export class PostModel extends BaseModel<PostModel> {
       'title',
       'slug',
       'summary',
+      'content',
       'publishedAt',
       'author',
     ];
@@ -33,6 +35,7 @@ export class PostModel extends BaseModel<PostModel> {
       title:   To.string(data[ 'title' ]),
       slug:    To.string(data[ 'slug' ]),
       summary: To.string(data[ 'summary' ]),
+      content: To.string(data[ 'content' ]),
 
       publishedAt: To.empty(
         data[ 'published_at' ],

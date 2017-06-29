@@ -16,7 +16,7 @@ export class PostApiService {
   ) {
   }
 
-  public listPosts(page: number = 1): Observable<CollectionModel<PostModel>> {
+  public getList(page: number = 1): Observable<CollectionModel<PostModel>> {
     return this
       .api
       .request(
@@ -27,6 +27,18 @@ export class PostApiService {
         },
       )
       .map((data: object) => CollectionModel.fromApi(data, PostModel, page));
-  }
+  } // end getList()
+
+  public getOne(slug: string): Observable<PostModel> {
+    return this
+      .api
+      .request(
+        'GET',
+        `${this.baseUrl}/${slug}`,
+        {
+        },
+      )
+      .map((data: object) => PostModel.fromApi(data));
+  } // end getOne()
 
 }

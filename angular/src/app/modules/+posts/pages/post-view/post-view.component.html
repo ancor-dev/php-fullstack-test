@@ -1,0 +1,8 @@
+<h1>{{ post.title }}</h1>
+
+<p class="post-metadata">
+  <span class="metadata"><i class="fa fa-calendar"></i> {{ post.publishedAt | date: 'longDate' }}</span>
+  <span class="metadata"><i class="fa fa-user"></i> {{ post.author.email }}</span>
+</p>
+
+<div class="post-body" markdown-to-html [data]="post.content"></div>

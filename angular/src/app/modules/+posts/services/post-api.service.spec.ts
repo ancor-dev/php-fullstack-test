@@ -34,7 +34,7 @@ describe('PostApiService', () => {
       spyOn(CollectionModel, 'fromApi').and.returnValue('collection-1');
       spyOn(api, 'request').and.returnValue(Observable.of('server-response'));
 
-      service.listPosts(222).subscribe((res) => {
+      service.getList(222).subscribe((res) => {
         expect(res).toBe('collection-1');
       });
 

@@ -27,7 +27,8 @@
 
     "font-awesome": "^4.7.0",
     "bootstrap": "~4.0.0-alpha.6",
-    "http-status": "^1.0.1"
+    "http-status": "^1.0.1",
+    "ng2-markdown-to-html": "~1.2.1"
   },
   "devDependencies": {
     "@angular/cli": "1.1.3",
