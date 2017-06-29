@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptionsArgs } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -8,6 +8,8 @@ import * as HttpStatus from 'http-status';
 import { ApiRequestOptionsArgs } from 'app/models/request-options';
 import { ResponseWrap } from 'app/models/response-wrap';
 import { SessionService } from './session.service';
+import { APP_CONFIG, AppConfig } from './app-config';
+
 
 /**
  * @todo: finish the unit test
@@ -16,6 +18,7 @@ import { SessionService } from './session.service';
 export class ApiService {
 
   public constructor(
+    @Inject(APP_CONFIG) private config: AppConfig,
     private session: SessionService,
     private http: Http,
   ) {
@@ -33,7 +36,7 @@ export class ApiService {
 
     return this
       .http
-      .request(url, preparedOptions)
+      .request(`${this.config.baseUrl}${url}`, preparedOptions)
       .map(this.handleResponse.bind(this))
       .catch(this.handleError.bind(this));
   }

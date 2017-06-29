@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls:   [ './app.component.scss' ],
 })
 export class AppComponent implements OnInit {
-  public title = 'Welcome to app!!';
+  public title = 'Angular Demo';
 
   public ngOnInit(): void {
-    console.log('Application initialized');
   }
 
 }

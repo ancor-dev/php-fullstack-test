@@ -1,12 +1,8 @@
 /**
  * This is helper class for parse server response
+ * @todo: default values
  */
 export class To {
-
-  // public static number(raw: any): number {
-  //   const n = Number(raw);
-  //   return raw === undefined || raw === null || isNaN(n) ? null : n;
-  // }
 
   public static number(raw: any): number {
     const n = Number(raw);

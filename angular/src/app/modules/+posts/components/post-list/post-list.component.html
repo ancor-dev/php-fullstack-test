@@ -1,0 +1,12 @@
+<app-spinner *ngIf="loading$ | async"></app-spinner>
+
+<div class="posts" *ngIf="collection$ | async as collection">
+    <app-post *ngFor="let post of collection.items" [post]="post"></app-post>
+
+    <div class="well" *ngIf="!collection.items.length">Posts not found</div>
+
+    <app-pagination [collection]="collection"
+                    (changePage)="onChangePage($event)"
+    ></app-pagination>
+</div>
+

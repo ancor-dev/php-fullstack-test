@@ -1,0 +1,15 @@
+<article class="post">
+  <h2>
+    <a [routerLink]="['post', post.slug]">
+      {{ post.title }}
+    </a>
+  </h2>
+
+  <p class="post-metadata">
+    <span class="metadata"><i class="fa fa-calendar"></i> {{ post.publishedAt | date: 'longDate' }}</span>
+    <span class="metadata"><i class="fa fa-user"></i> {{ post.author?.email }}</span>
+  </p>
+
+  {{ post.summary }}
+</article>
+
