@@ -37,11 +37,12 @@ export class ApiService {
     return this
       .http
       .request(`${this.config.baseUrl}${url}`, preparedOptions)
+      .catch(this.handleError.bind(this))
       .map(this.handleResponse.bind(this))
-      .catch(this.handleError.bind(this));
+    ;
   }
 
-  private prepare(params: ApiRequestOptionsArgs): RequestOptionsArgs {
+  private prepare(params: RequestOptionsArgs): RequestOptionsArgs {
     if (!params.headers) {
       params.headers = new Headers();
     }
