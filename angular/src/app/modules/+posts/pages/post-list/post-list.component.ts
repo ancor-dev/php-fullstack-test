@@ -12,7 +12,6 @@ import { PostListDataService } from './post-list-data.service';
 @Component({
   templateUrl: './post-list.component.html',
   styleUrls:   [ './post-list.component.scss' ],
-  providers:   [ PostListDataService ],
 })
 export class PostListComponent implements OnInit {
 

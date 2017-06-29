@@ -18,6 +18,7 @@ const postApiMock = {
 };
 
 const postListDataMock = {
+  init() {}
 };
 
 /**
