@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PostComponent } from './post.component';
-import { PostModel } from '../../models/post.model';
+import { PostModel } from '../../../models/post.model';
 
 const postMock = <PostModel> {
   author: {},

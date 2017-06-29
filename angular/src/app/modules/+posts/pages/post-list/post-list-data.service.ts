@@ -16,6 +16,8 @@ export class PostListDataService {
   private _collection$ = new BehaviorSubject<CollectionModel<PostModel>>(undefined);
   private _loading$    = new BehaviorSubject<boolean>(false);
 
+  private initialized: boolean = false;
+
   public constructor(
     private postApi: PostApiService,
   ) {
@@ -23,11 +25,18 @@ export class PostListDataService {
     this.collection$ = this._collection$.filter((data) => !!data);
   }
 
+  public init(): void {
+    if (!this.initialized) {
+      this.initialized = true;
+      this.changePage(1);
+    }
+  }
+
   public changePage(page: number): void {
     this._loading$.next(true);
     this
       .postApi
-      .listPosts(page)
+      .getList(page)
       .finally(() => this._loading$.next(false))
       .subscribe(
         (collection) => this._collection$.next(collection),

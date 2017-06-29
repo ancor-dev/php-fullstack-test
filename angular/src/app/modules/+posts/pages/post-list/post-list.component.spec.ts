@@ -6,14 +6,18 @@ import { Observable } from 'rxjs/Observable';
 import { CollectionModel } from 'app/models/collection.model';
 import { PostListComponent } from './post-list.component';
 import { PostApiService } from '../../services/post-api.service';
+import { PostListDataService } from './post-list-data.service';
 
-const postApi = {
-  listPosts() {
+const postApiMock = {
+  getList() {
     const collection = new CollectionModel({
       items: [],
     } as any);
     return Observable.of(collection);
   }
+};
+
+const postListDataMock = {
 };
 
 /**
@@ -28,10 +32,14 @@ describe('PostListComponent', () => {
       providers: [
         {
           provide: PostApiService,
-          useValue: postApi,
+          useValue: postApiMock,
+        },
+        {
+          provide: PostListDataService,
+          useValue: postListDataMock,
         },
       ],
-      declarations: [PostListComponent ],
+      declarations: [ PostListComponent ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();

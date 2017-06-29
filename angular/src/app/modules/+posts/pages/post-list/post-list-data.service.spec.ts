@@ -5,8 +5,7 @@ import { PostApiService } from '../../services/post-api.service';
 import { Subject } from 'rxjs/Subject';
 
 const postApiMock = {
-  listPosts(page: number) {
-  },
+  getList(page: number) { },
 };
 
 describe('PostsDataService', () => {
@@ -31,13 +30,13 @@ describe('PostsDataService', () => {
     inject([ PostListDataService, PostApiService ], (service: PostListDataService, api) => {
       const s = new Subject();
       let loading, collection;
-      spyOn(api, 'listPosts').and.returnValue(s);
+      spyOn(api, 'getList').and.returnValue(s);
 
       service.loading$.subscribe((res) => loading = res);
       service.collection$.subscribe((res) => collection = res);
 
       service.changePage(222);
-      expect(api.listPosts).toHaveBeenCalledWith(222);
+      expect(api.getList).toHaveBeenCalledWith(222);
       expect(loading).toBeTruthy();
       expect(collection).toBeUndefined();
 
@@ -48,4 +47,15 @@ describe('PostsDataService', () => {
     }),
   );
 
+  it(
+    'method init() should call changePage() only first time',
+    inject([ PostListDataService ], (service: PostListDataService) => {
+      spyOn(service, 'changePage');
+
+      service.init();
+      service.init();
+
+      expect(service.changePage).toHaveBeenCalledTimes(1);
+    }),
+  );
 });

@@ -28,7 +28,7 @@ export class PostListComponent implements OnInit {
     this.loading$    = this.data.loading$;
     this.collection$ = this.data.collection$;
 
-    this.data.changePage(1);
+    this.data.init();
   }
 
   public onChangePage(page: number): void {
